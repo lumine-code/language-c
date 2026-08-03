@@ -1,0 +1,51 @@
+{
+  "name": "language-c",
+  "author": "lumine-code",
+  "version": "1.0.0",
+  "main": "lib/main",
+  "description": "C and C++ language support.",
+  "keywords": [
+    "cpp",
+    "c++",
+    "cuda",
+    "header",
+    "arduino",
+    "objective-c",
+    "tree-sitter"
+  ],
+  "repository": "https://github.com/lumine-code/language-c",
+  "license": "MIT",
+  "engines": {
+    "atom": "*",
+    "node": ">=12"
+  },
+  "consumedServices": {
+    "hyperlink.injection": {
+      "versions": {
+        "^1.0.0": "consumeHyperlinkInjection"
+      }
+    },
+    "todo.injection": {
+      "versions": {
+        "^1.0.0": "consumeTodoInjection"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/lumine-code/language-c/issues"
+  },
+  "scripts": {
+    "test": "lumine --test spec",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^18.2.2",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.6"
+  }
+}
