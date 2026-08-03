@@ -10,6 +10,10 @@ C and C++ language support.
 - **Code folding**: collapse blocks, functions, and comments.
 - **Comment toggling**: line and block comment support.
 
+## Installation
+
+To install `language-c` search for _language-c_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/language-c`.
+
 ## Services
 
 - **hyperlink.injection** (`^1.0.0`): consumed to highlight URLs inside code and comments as clickable links.
