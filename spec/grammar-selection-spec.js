@@ -15,14 +15,14 @@ describe("C++ grammar selection", () => {
     const grammar = atom.grammars.selectGrammar("shape.hh", "// -*- C++ -*-\nclass Shape {};\n");
 
     expect(grammar.scopeName).toBe("source.cpp");
-    expect(grammar.constructor.name).toBe("WASMTreeSitterGrammar");
+    expect(grammar.constructor.name).toBe("TreeSitterGrammar");
   });
 
   it("prefers the Tree-sitter grammar for an ordinary C++ file", () => {
     const grammar = atom.grammars.selectGrammar("shape.cpp", "class Shape {};\n");
 
     expect(grammar.scopeName).toBe("source.cpp");
-    expect(grammar.constructor.name).toBe("WASMTreeSitterGrammar");
+    expect(grammar.constructor.name).toBe("TreeSitterGrammar");
   });
 
   it("still honours the TextMate preference", () => {

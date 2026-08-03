@@ -1,7 +1,7 @@
 {
   "name": "C",
   "scopeName": "source.c",
-  "type": "modern-tree-sitter",
+  "type": "tree-sitter",
   "parser": "tree-sitter-c",
   "firstLineRegex": "-\\*-[^*]*(Mode:\\s*)?C(\\s*;.*?)?\\s*-\\*-",
   "injectionRegex": "^(c|C)$",
