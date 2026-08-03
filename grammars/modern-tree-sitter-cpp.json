@@ -4,6 +4,13 @@
   "type": "modern-tree-sitter",
   "parser": "tree-sitter-cpp",
   "injectionRegex": "^(c|C)(\\+\\+|pp|PP)$",
+  // Matches the TextMate grammar's `-*- C++ -*-` modeline rule, which would
+  // otherwise win by 0.5 against the 0.1 that prefers Tree-sitter. That
+  // modeline is the usual way a header with no extension declares itself C++.
+  "firstLineRegex": [
+    "-\\*-[^*]*(?:[Mm]ode\\s*:\\s*)?[Cc]\\+\\+(?:\\s*;.*?)?\\s*-\\*-",
+    "vim\\b.*\\bset\\b.*\\b(filetype|ft|syntax)=(cpp|c\\+\\+)"
+  ],
   "treeSitter": {
     "parserSource": "github:tree-sitter/tree-sitter-cpp#v0.23.4",
     "wasmBuildTool": "tree-sitter-cli#v0.26.11",
