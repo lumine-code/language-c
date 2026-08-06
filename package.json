@@ -24,7 +24,7 @@
   "license": "MIT",
   "engines": {
     "lumine": "^1.0.0",
-    "node": ">=12"
+    "node": ">=24"
   },
   "consumedServices": {
     "hyperlink.injection": {
