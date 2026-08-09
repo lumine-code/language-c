@@ -7,28 +7,28 @@
 
 describe("C++ grammar selection", () => {
   beforeEach(async () => {
-    await atom.packages.activatePackage("language-c");
-    atom.config.set("language.useTreeSitterParsers", true);
+    await lumine.packages.activatePackage("language-c");
+    lumine.config.set("language.useTreeSitterParsers", true);
   });
 
   it("prefers the Tree-sitter grammar for a C++ modeline", () => {
-    const grammar = atom.grammars.selectGrammar("shape.hh", "// -*- C++ -*-\nclass Shape {};\n");
+    const grammar = lumine.grammars.selectGrammar("shape.hh", "// -*- C++ -*-\nclass Shape {};\n");
 
     expect(grammar.scopeName).toBe("source.cpp");
     expect(grammar.constructor.name).toBe("TreeSitterGrammar");
   });
 
   it("prefers the Tree-sitter grammar for an ordinary C++ file", () => {
-    const grammar = atom.grammars.selectGrammar("shape.cpp", "class Shape {};\n");
+    const grammar = lumine.grammars.selectGrammar("shape.cpp", "class Shape {};\n");
 
     expect(grammar.scopeName).toBe("source.cpp");
     expect(grammar.constructor.name).toBe("TreeSitterGrammar");
   });
 
   it("still honours the TextMate preference", () => {
-    atom.config.set("language.useTreeSitterParsers", false);
+    lumine.config.set("language.useTreeSitterParsers", false);
 
-    const grammar = atom.grammars.selectGrammar("shape.hh", "// -*- C++ -*-\nclass Shape {};\n");
+    const grammar = lumine.grammars.selectGrammar("shape.hh", "// -*- C++ -*-\nclass Shape {};\n");
 
     expect(grammar.scopeName).toBe("source.cpp");
     expect(grammar.constructor.name).toBe("Grammar");

@@ -1,10 +1,10 @@
 let TextEditor = null;
 const buildTextEditor = function (params) {
-  if (atom.workspace.buildTextEditor != null) {
-    return atom.workspace.buildTextEditor(params);
+  if (lumine.workspace.buildTextEditor != null) {
+    return lumine.workspace.buildTextEditor(params);
   } else {
     if (TextEditor == null) {
-      ({ TextEditor } = require("atom"));
+      ({ TextEditor } = require("lumine"));
     }
     return new TextEditor(params);
   }
@@ -14,13 +14,13 @@ describe("Language-C", function () {
   let grammar = null;
 
   beforeEach(function () {
-    atom.config.set("language.useTreeSitterParsers", false);
+    lumine.config.set("language.useTreeSitterParsers", false);
 
-    return waitsForPromise(() => atom.packages.activatePackage("language-c"));
+    return waitsForPromise(() => lumine.packages.activatePackage("language-c"));
   });
 
   describe("C", function () {
-    beforeEach(() => (grammar = atom.grammars.grammarForScopeName("source.c")));
+    beforeEach(() => (grammar = lumine.grammars.grammarForScopeName("source.c")));
 
     it("parses the grammar", function () {
       expect(grammar).toBeTruthy();
@@ -3151,7 +3151,7 @@ some_t a[3] = {
   });
 
   describe("C++", function () {
-    beforeEach(() => (grammar = atom.grammars.grammarForScopeName("source.cpp")));
+    beforeEach(() => (grammar = lumine.grammars.grammarForScopeName("source.cpp")));
 
     it("parses the grammar", function () {
       expect(grammar).toBeTruthy();

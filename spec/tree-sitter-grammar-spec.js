@@ -2,7 +2,7 @@ const path = require("path");
 
 describe("WASM Tree-sitter C grammar", () => {
   beforeEach(async () => {
-    await atom.packages.activatePackage("language-c");
+    await lumine.packages.activatePackage("language-c");
   });
 
   it("passes grammar tests", async () => {
