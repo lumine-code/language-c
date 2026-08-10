@@ -13,10 +13,10 @@ const buildTextEditor = function (params) {
 describe("Language-C", function () {
   let grammar = null;
 
-  beforeEach(function () {
+  beforeEach(async () => {
     lumine.config.set("language.useTreeSitterParsers", false);
 
-    return waitsForPromise(() => lumine.packages.activatePackage("language-c"));
+    await lumine.packages.activatePackage("language-c");
   });
 
   describe("C", function () {
