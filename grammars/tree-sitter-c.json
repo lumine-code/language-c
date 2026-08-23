@@ -7,7 +7,7 @@
   "injectionRegex": "^(c|C)$",
   "treeSitter": {
     "parserSource": "github:tree-sitter/tree-sitter-c#v0.24.2",
-    "wasmBuildTool": "tree-sitter-cli#v0.26.11",
+    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
     "grammar": "tree-sitter-c/tree-sitter-c.wasm",
     "languageSegment": "c",
     "highlightsQuery": ["common/highlights.scm", "tree-sitter-c/highlights.scm"],
