@@ -8,7 +8,7 @@
 describe("C++ grammar selection", () => {
   beforeEach(async () => {
     await lumine.packages.activatePackage("language-c");
-    lumine.config.set("language.useTreeSitterParsers", true);
+    lumine.config.set("editor.useTreeSitterParsers", true);
   });
 
   it("prefers the Tree-sitter grammar for a C++ modeline", () => {
@@ -26,7 +26,7 @@ describe("C++ grammar selection", () => {
   });
 
   it("still honours the TextMate preference", () => {
-    lumine.config.set("language.useTreeSitterParsers", false);
+    lumine.config.set("editor.useTreeSitterParsers", false);
 
     const grammar = lumine.grammars.selectGrammar("shape.hh", "// -*- C++ -*-\nclass Shape {};\n");
 

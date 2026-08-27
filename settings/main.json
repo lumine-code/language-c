@@ -1,9 +1,7 @@
 {
   ".source.c, .source.cpp, .source.objc, .source.objcpp": {
-    "language": {
+    "editor": {
       "commentStart": "// ",
-      // Technically, line comments aren't universally valid in C, but all modern
-      // C compilers support them.
       "commentDelimiters": {
         "block": ["/*", "*/"],
         "line": "//"
@@ -13,7 +11,7 @@
     }
   },
   ".source.c, .source.cpp": {
-    "language": {
+    "editor": {
       "foldEndPattern": "(?<!\\*)\\*\\*/|^\\s*\\}"
     }
   }
