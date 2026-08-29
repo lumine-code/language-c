@@ -78,8 +78,8 @@
 ; is a type declaration (for some reason). This node structure seems to exist
 ; only in that unusual and incorrect scenario, so we'll stop it from happening
 ; so that it doesn't override the underlying `constant.other.c` scope.
-(translation_unit
-  (type_identifier) @_IGNORE_
+((type_identifier) @_IGNORE_
+  (#is? test.typeAt "parent translation_unit")
   (#set! capture.final))
 
 ; These types are all reserved words; if we see an identifier with this name,
@@ -399,9 +399,12 @@
 ("," @punctuation.separator.comma._LANG_
   (#set! capture.shy))
 
-(parameter_list
-  "(" @punctuation.definition.parameters.begin.bracket.round._LANG_
-  ")" @punctuation.definition.parameters.end.bracket.round._LANG_
+(("(" @punctuation.definition.parameters.begin.bracket.round._LANG_)
+  (#is? test.typeAt "parent parameter_list")
+  (#set! capture.final true))
+
+((")" @punctuation.definition.parameters.end.bracket.round._LANG_)
+  (#is? test.typeAt "parent parameter_list")
   (#set! capture.final true))
 
 (parenthesized_expression
