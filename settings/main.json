@@ -5,14 +5,7 @@
       "commentDelimiters": {
         "block": ["/*", "*/"],
         "line": "//"
-      },
-      "increaseIndentPattern": "(?x) ^ .* \\{ [^}\"']* $ |^ .* \\( [^\\)\"']* $ |^ \\s* (public|private|protected): \\s* $ |^ \\s* @(public|private|protected) \\s* $ |^ \\s* \\{ \\} $",
-      "decreaseIndentPattern": "(?x) ^ \\s* (\\s* /[*] .* [*]/ \\s*)* \\} |^ \\s* (\\s* /[*] .* [*]/ \\s*)* \\) |^ \\s* (public|private|protected): \\s* $ |^ \\s* @(public|private|protected) \\s* $"
-    }
-  },
-  ".source.c, .source.cpp": {
-    "editor": {
-      "foldEndPattern": "(?<!\\*)\\*\\*/|^\\s*\\}"
+      }
     }
   }
 }

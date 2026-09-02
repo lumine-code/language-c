@@ -4,7 +4,7 @@ C and C++ language support.
 
 ## Features
 
-- **Grammars**: provides Tree-sitter grammars built from [tree-sitter-c](https://github.com/tree-sitter/tree-sitter-c) and [tree-sitter-cpp](https://github.com/tree-sitter/tree-sitter-cpp) and TextMate grammars derived from [atom/language-c](https://github.com/atom/language-c).
+- **Grammars**: provides Tree-sitter grammars built from [tree-sitter-c](https://github.com/tree-sitter/tree-sitter-c) and [tree-sitter-cpp](https://github.com/tree-sitter/tree-sitter-cpp).
 - **Syntax highlighting**: full grammar coverage for C and C++ files.
 - **Snippets**: shortcuts for common declarations, control structures, and preprocessor directives.
 - **Code folding**: collapse blocks, functions, and comments.

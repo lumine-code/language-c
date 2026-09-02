@@ -3,10 +3,8 @@
   "scopeName": "source.cpp",
   "type": "tree-sitter",
   "parser": "tree-sitter-cpp",
-  "injectionRegex": "^(c|C)(\\+\\+|pp|PP)$",
-  // Matches the TextMate grammar's `-*- C++ -*-` modeline rule, which would
-  // otherwise win by 0.5 against the 0.1 that prefers Tree-sitter. That
-  // modeline is the usual way a header with no extension declares itself C++.
+  "injectionNames": ["c++", "cpp"],
+  // A modeline is the usual way a header with no extension declares itself C++.
   "firstLineRegex": [
     "-\\*-[^*]*(?:[Mm]ode\\s*:\\s*)?[Cc]\\+\\+(?:\\s*;.*?)?\\s*-\\*-",
     "vim\\b.*\\bset\\b.*\\b(filetype|ft|syntax)=(cpp|c\\+\\+)"
@@ -14,12 +12,12 @@
   "treeSitter": {
     "parserSource": "github:tree-sitter/tree-sitter-cpp#v0.23.4",
     "wasmBuildTool": "tree-sitter-cli#v0.26.13",
-    "grammar": "tree-sitter-cpp/tree-sitter-cpp.wasm",
+    "grammar": "cpp.wasm",
     "languageSegment": "cpp",
-    "highlightsQuery": ["common/highlights.scm", "tree-sitter-cpp/highlights.scm"],
-    "tagsQuery": "tree-sitter-cpp/tags.scm",
-    "foldsQuery": "tree-sitter-cpp/folds.scm",
-    "indentsQuery": "tree-sitter-cpp/indents.scm"
+    "highlightsQuery": ["c-shared-highlights.scm", "cpp-highlights.scm"],
+    "tagsQuery": "cpp-tags.scm",
+    "foldsQuery": "cpp-folds.scm",
+    "indentsQuery": "cpp-indents.scm"
   },
   "fileTypes": [
     "cc",
