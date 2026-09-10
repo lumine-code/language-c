@@ -118,26 +118,26 @@
 ; Candidate for an injection grammar.
 (string_literal "\"") @string.quoted.double._LANG_
 
-(string_literal
-  "\"" @punctuation.definition.string.begin._LANG_
+("\"" @punctuation.definition.string.begin._LANG_
+  (#is? test.childOfType string_literal)
   (#is? test.first true))
 
-(string_literal
-  "\"" @punctuation.definition.string.end._LANG_
+("\"" @punctuation.definition.string.end._LANG_
+  (#is? test.childOfType string_literal)
   (#is? test.last true))
 
 (char_literal "'") @string.quoted.single._LANG_
 
-(char_literal
-  "'" @punctuation.definition.string.begin._LANG_
+("'" @punctuation.definition.string.begin._LANG_
+  (#is? test.childOfType char_literal)
   (#is? test.first true))
 
-(char_literal
-  "'" @punctuation.definition.string.end._LANG_
+("'" @punctuation.definition.string.end._LANG_
+  (#is? test.childOfType char_literal)
   (#is? test.last true))
 
-(string_literal (escape_sequence) @constant.character.escape._LANG_)
-(char_literal (escape_sequence) @constant.character.escape._LANG_)
+((escape_sequence) @constant.character.escape._LANG_
+  (#is? test.childOfType "string_literal char_literal"))
 
 
 ; FUNCTIONS
@@ -236,8 +236,8 @@
 ; Function parameters
 ; -------------------
 
-(preproc_params
-  (identifier) @variable.parameter.preprocessor._LANG_)
+((identifier) @variable.parameter.preprocessor._LANG_
+  (#is? test.childOfType preproc_params))
 
 ; The "foo" in `const char foo` within a parameter list.
 (parameter_declaration
@@ -307,7 +307,8 @@
 
 ; Match // comments.
 ((comment) @comment.line.double-slash._LANG_
-  (#match? @comment.line.double-slash._LANG_ "^\\s*//"))
+  (#match? @comment.line.double-slash._LANG_ "^\\s*//")
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 
 ((comment) @punctuation.definition.comment._LANG_
   (#match? @punctuation.definition.comment._LANG_ "^\\s*//")
@@ -387,7 +388,8 @@
 
 (field_expression "." @keyword.operator.accessor.dot._LANG_)
 (field_expression "->" @keyword.operator.accessor.arrow._LANG_)
-(preproc_params "..." @keyword.operator.ellipsis._LANG_)
+("..." @keyword.operator.ellipsis._LANG_
+  (#is? test.childOfType preproc_params))
 
 ["&&" "||"] @keyword.operator.logical._LANG_
 

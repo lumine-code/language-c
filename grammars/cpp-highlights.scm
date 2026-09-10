@@ -137,9 +137,6 @@
 (qualified_identifier
   scope: (namespace_identifier) @support.other.namespace.cpp)
 
-(string_literal (escape_sequence) @constant.character.escape.cpp)
-(char_literal (escape_sequence) @constant.character.escape.cpp)
-
 (this) @variable.language.this.cpp
 
 ; VARIABLES
@@ -216,13 +213,19 @@
     ")" @punctuation.definition.expression.end.bracket.round.cpp
     (#set! capture.final true)))
 
-(template_argument_list
-  "<" @punctuation.definition.parameters.begin.bracket.angle.cpp
-  ">" @punctuation.definition.parameters.end.bracket.angle.cpp)
+("<" @punctuation.definition.parameters.begin.bracket.angle.cpp
+  (#is? test.childOfType template_argument_list)
+  (#is? test.first true))
+(">" @punctuation.definition.parameters.end.bracket.angle.cpp
+  (#is? test.childOfType template_argument_list)
+  (#is? test.last true))
 
-(template_parameter_list
-  "<" @punctuation.definition.parameters.begin.bracket.angle.cpp
-  ">" @punctuation.definition.parameters.end.bracket.angle.cpp)
+("<" @punctuation.definition.parameters.begin.bracket.angle.cpp
+  (#is? test.childOfType template_parameter_list)
+  (#is? test.first true))
+(">" @punctuation.definition.parameters.end.bracket.angle.cpp
+  (#is? test.childOfType template_parameter_list)
+  (#is? test.last true))
 
 
 ; TODO:
