@@ -10,6 +10,11 @@ describe("WASM Tree-sitter C grammar", () => {
     await lumine.packages.activatePackage("language-c");
   });
 
+  async function highlightCaptures(editor, options) {
+    const groups = await editor.getGrammarQueryCaptureGroups("highlightsQuery", options);
+    return groups.find(({ grammar }) => grammar === editor.getGrammar())?.captures ?? [];
+  }
+
   it("passes grammar tests", async () => {
     await runGrammarTests(path.join(__dirname, "fixtures", "sample.c"), /\/\//);
     await runGrammarTests(path.join(__dirname, "fixtures", "sample.cpp"), /\/\//);
@@ -61,8 +66,7 @@ describe("WASM Tree-sitter C grammar", () => {
       );
       await editor.languageMode.atTransactionEnd();
       const closingRow = editor.getLastBufferRow();
-      const layer = editor.languageMode.rootLanguageLayer;
-      const captures = layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
+      const captures = await highlightCaptures(editor, {
         startPosition: new Point(closingRow, 0),
         endPosition: new Point(closingRow, 1),
       });
@@ -74,7 +78,7 @@ describe("WASM Tree-sitter C grammar", () => {
         ),
       ).toBe(true);
 
-      const middleCaptures = layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
+      const middleCaptures = await highlightCaptures(editor, {
         startPosition: new Point(3000, 0),
         endPosition: new Point(3006, 0),
       });
@@ -93,16 +97,15 @@ describe("WASM Tree-sitter C grammar", () => {
         ).join("\r\n"),
       );
       await editor.languageMode.ready;
-      const layer = editor.languageMode.rootLanguageLayer;
 
+      expect((await highlightCaptures(editor)).length).toBeLessThanOrEqual(40000);
       expect(
-        layer.queries.highlightsQuery.captures(layer.tree.rootNode).length,
-      ).toBeLessThanOrEqual(40000);
-      expect(
-        layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
-          startPosition: new Point(400, 0),
-          endPosition: new Point(406, 0),
-        }).length,
+        (
+          await highlightCaptures(editor, {
+            startPosition: new Point(400, 0),
+            endPosition: new Point(406, 0),
+          })
+        ).length,
       ).toBeLessThanOrEqual(240);
     }
   });
@@ -124,8 +127,7 @@ describe("WASM Tree-sitter C grammar", () => {
       "punctuation.definition.parameters.end.bracket.angle.cpp",
     );
 
-    const layer = editor.languageMode.rootLanguageLayer;
-    const captures = layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
+    const captures = await highlightCaptures(editor, {
       startPosition: new Point(3000, 0),
       endPosition: new Point(3006, 0),
     });
@@ -156,14 +158,13 @@ describe("WASM Tree-sitter C grammar", () => {
       editor.setText(macroLines.join("\r\n"));
       await editor.languageMode.ready;
 
-      const layer = editor.languageMode.rootLanguageLayer;
-      expect(layer.tree.rootNode.hasError).toBe(false);
-      const parameterCaptures = layer.queries.highlightsQuery
-        .captures(layer.tree.rootNode, {
+      expect((await editor.getSyntaxDiagnostics()).hasError).toBe(false);
+      const parameterCaptures = (
+        await highlightCaptures(editor, {
           startPosition: new Point(3000, 0),
           endPosition: new Point(3006, 0),
         })
-        .filter(({ name }) => name === `variable.parameter.preprocessor.${segment}`);
+      ).filter(({ name }) => name === `variable.parameter.preprocessor.${segment}`);
       expect(parameterCaptures.length).toBe(6);
       expect(
         parameterCaptures.every(
@@ -182,16 +183,16 @@ describe("WASM Tree-sitter C grammar", () => {
       stringLines.push('";');
       editor.setText(stringLines.join("\r\n"));
       await editor.languageMode.atTransactionEnd();
-      expect(layer.tree.rootNode.hasError).toBe(false);
+      expect((await editor.getSyntaxDiagnostics()).hasError).toBe(false);
       expect(editor.scopeDescriptorForBufferPosition([3000, 0]).getScopesArray()).toContain(
         `constant.character.escape.${segment}`,
       );
-      const escapeCaptures = layer.queries.highlightsQuery
-        .captures(layer.tree.rootNode, {
+      const escapeCaptures = (
+        await highlightCaptures(editor, {
           startPosition: new Point(3000, 0),
           endPosition: new Point(3006, 0),
         })
-        .filter(({ name }) => name === `constant.character.escape.${segment}`);
+      ).filter(({ name }) => name === `constant.character.escape.${segment}`);
       expect(escapeCaptures.length).toBe(6);
       expect(
         escapeCaptures.every(
