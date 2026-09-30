@@ -7,7 +7,9 @@
   // A modeline is the usual way a header with no extension declares itself C++.
   "firstLineRegex": [
     "-\\*-[^*]*(?:[Mm]ode\\s*:\\s*)?[Cc]\\+\\+(?:\\s*;.*?)?\\s*-\\*-",
-    "vim\\b.*\\bset\\b.*\\b(filetype|ft|syntax)=(cpp|c\\+\\+)"
+    // Stop at the first Vim and set tokens instead of backtracking over them.
+    // \x0a keeps existing shebang prefix line counts unchanged.
+    "(?:^|\\x0a)(?:(?!vim\\b).)*vim\\b(?:(?!\\bset\\b).)*\\bset\\b.*\\b(filetype|ft|syntax)=(cpp|c\\+\\+)"
   ],
   "treeSitter": {
     "parserSource": "github:tree-sitter/tree-sitter-cpp#v0.23.4",
