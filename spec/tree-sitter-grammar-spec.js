@@ -11,8 +11,12 @@ describe("WASM Tree-sitter C grammar", () => {
   });
 
   async function highlightCaptures(editor, options) {
-    const groups = await editor.getGrammarQueryCaptureGroups("highlightsQuery", options);
-    return groups.find(({ grammar }) => grammar === editor.getGrammar())?.captures ?? [];
+    const capturesQuery = await editor.getGrammar().getQuery("highlightsQuery");
+    const queryRoot = editor.getSyntaxNodeAtBufferPosition(
+      [0, 0],
+      (node) => !node.parent && node.startIndex === 0,
+    );
+    return capturesQuery.captures(queryRoot, options);
   }
 
   it("passes grammar tests", async () => {
@@ -158,7 +162,12 @@ describe("WASM Tree-sitter C grammar", () => {
       editor.setText(macroLines.join("\r\n"));
       await editor.languageMode.ready;
 
-      expect((await editor.getSyntaxDiagnostics()).hasError).toBe(false);
+      expect(
+        editor.getSyntaxNodeAtBufferPosition(
+          [0, 0],
+          (node) => !node.parent && node.startIndex === 0,
+        ).hasError,
+      ).toBe(false);
       const parameterCaptures = (
         await highlightCaptures(editor, {
           startPosition: new Point(3000, 0),
@@ -183,7 +192,12 @@ describe("WASM Tree-sitter C grammar", () => {
       stringLines.push('";');
       editor.setText(stringLines.join("\r\n"));
       await editor.languageMode.atTransactionEnd();
-      expect((await editor.getSyntaxDiagnostics()).hasError).toBe(false);
+      expect(
+        editor.getSyntaxNodeAtBufferPosition(
+          [0, 0],
+          (node) => !node.parent && node.startIndex === 0,
+        ).hasError,
+      ).toBe(false);
       expect(editor.scopeDescriptorForBufferPosition([3000, 0]).getScopesArray()).toContain(
         `constant.character.escape.${segment}`,
       );
