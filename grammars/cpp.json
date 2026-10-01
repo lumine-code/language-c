@@ -19,7 +19,8 @@
     "highlightsQuery": ["c-shared-highlights.scm", "cpp-highlights.scm"],
     "tagsQuery": "cpp-tags.scm",
     "foldsQuery": "cpp-folds.scm",
-    "indentsQuery": "cpp-indents.scm"
+    "indentsQuery": "cpp-indents.scm",
+    "injectionsQuery": "cpp-injections.scm"
   },
   "fileTypes": [
     "cc",

@@ -13,7 +13,8 @@
     "highlightsQuery": ["c-shared-highlights.scm", "c-highlights.scm"],
     "tagsQuery": "c-tags.scm",
     "foldsQuery": "c-folds.scm",
-    "indentsQuery": "c-indents.scm"
+    "indentsQuery": "c-indents.scm",
+    "injectionsQuery": "c-injections.scm"
   },
   "fileTypes": ["h", "c", "h.in", "xpm"],
   "comments": {
