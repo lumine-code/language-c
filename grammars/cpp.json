@@ -12,7 +12,7 @@
     "(?:^|\\x0a)(?:(?!vim\\b).)*vim\\b(?:(?!\\bset\\b).)*\\bset\\b.*\\b(filetype|ft|syntax)=(cpp|c\\+\\+)"
   ],
   "treeSitter": {
-    "parserSource": "github:tree-sitter/tree-sitter-cpp#v0.23.4",
+    "parserSource": "github:tree-sitter/tree-sitter-cpp#c009222808634c1014f82438d4883753516a2c24",
     "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "cpp.wasm",
     "languageSegment": "cpp",

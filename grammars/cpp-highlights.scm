@@ -82,6 +82,9 @@
 ; FUNCTIONS
 ; =========
 
+["module" "import" "export"] @keyword.control.import.cpp
+(module_name (identifier) @entity.name.namespace.cpp)
+
 (field_initializer
   (field_identifier) @entity.name.function.cpp)
 
