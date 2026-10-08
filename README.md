@@ -2,6 +2,8 @@
 
 C and C++ language support.
 
+Fork of [pulsar-edit/pulsar](https://github.com/pulsar-edit/pulsar) (`packages/language-c`).
+
 ## Features
 
 - **Grammars**: provides Tree-sitter grammars built from [tree-sitter-c](https://github.com/tree-sitter/tree-sitter-c) and [tree-sitter-cpp](https://github.com/tree-sitter/tree-sitter-cpp).
