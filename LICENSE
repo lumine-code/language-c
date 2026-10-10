@@ -94,6 +94,8 @@ suitability for any purpose.
 ----- BEGIN THIRD-PARTY LICENSE: parser:tree-sitter_tree-sitter-c -----
 Source: https://github.com/tree-sitter/tree-sitter-c
 Revision: v0.24.2
+Additional source: https://github.com/tree-sitter/tree-sitter-cpp
+Additional revision: c009222808634c1014f82438d4883753516a2c24
 
 Original file: LICENSE
 
