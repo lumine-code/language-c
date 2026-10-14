@@ -1,16 +1,61 @@
 {
   "title": "language-c",
-  "description": "C syntax highlighting in the editor.",
-  "recordedOn": "2026-10-13",
-  "sourceRevision": "c0d363461e9fd878402933fbefa71c14032403a7",
+  "description": "C syntax highlighting at the default editor font size.",
+  "recordedOn": "2026-10-14",
+  "sourceRevision": "97d355dd0f8b71df6dc18ba48af915426a48902b",
+  "themeSourceRevision": "14a69683b0e3238e2bc128fbfae3866c1e4ee9c6",
   "mode": "normal",
   "fontSettings": "default",
+  "scenario": "demo.js",
+  "recipeHash": "d6e6ae802ead08df236782aad5a762af98fea73f170346f0da2286d20cb2f1b2",
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "electron": "44.7.0",
+    "chrome": "152.0.7977.130",
+    "devicePixelRatio": 1,
+    "locale": "en-GB",
+    "fontFamily": "Fira Code, Menlo, DejaVu Sans Mono, Consolas, monospace",
+    "fontSize": 14,
+    "themes": ["one-day-syntax", "one-day-ui"]
+  },
+  "viewport": { "width": 1100, "height": 820 },
+  "cornerRadius": 10,
+  "sources": {
+    "editor": {
+      "revision": "c4d7a05fe6960ae6fb041981d6cf13e9c0286b17",
+      "dirty": true,
+      "workingTreeHash": "af0ec098e764416df9522f3c6e555050b520e4700da382b2b983b2ff3742bd0a"
+    },
+    "package": {
+      "revision": "97d355dd0f8b71df6dc18ba48af915426a48902b",
+      "dirty": true,
+      "workingTreeHash": "5f8859fe6326687e19dd261bf72f2d64001b71e099c2f4e88817cccd0b4fa1bd"
+    },
+    "language-c": {
+      "revision": "97d355dd0f8b71df6dc18ba48af915426a48902b",
+      "dirty": true,
+      "workingTreeHash": "5f8859fe6326687e19dd261bf72f2d64001b71e099c2f4e88817cccd0b4fa1bd"
+    },
+    "one-theme": {
+      "revision": "14a69683b0e3238e2bc128fbfae3866c1e4ee9c6",
+      "dirty": true,
+      "workingTreeHash": "25d6ed50595d6b10f7d53e41dbbe8f92dcb5c0e911871356f3e6138e5c76df57"
+    }
+  },
+  "fixtures": [
+    {
+      "file": "example.c",
+      "sha256": "c3783af1576eefa992bc9f53bb40be8fdf34dad4c76e30501209ea467a47042a"
+    }
+  ],
   "images": [
     {
       "file": "demo.png",
       "label": "C syntax highlighting at the default editor font size.",
       "width": 1100,
-      "height": 820
+      "height": 820,
+      "sha256": "77d79339dd70bbe8280dace00687a35d3bfc874d31d89e0d577038207ee3910b"
     }
   ]
 }
