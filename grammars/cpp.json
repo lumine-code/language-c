@@ -13,7 +13,7 @@
   ],
   "treeSitter": {
     "parserSource": "github:tree-sitter/tree-sitter-cpp#c009222808634c1014f82438d4883753516a2c24",
-    "wasmBuildTool": "tree-sitter-cli#v0.27.0",
+    "wasmBuildTool": "tree-sitter-cli#v0.27.1",
     "grammar": "cpp.wasm",
     "languageSegment": "cpp",
     "highlightsQuery": ["c-shared-highlights.scm", "cpp-highlights.scm"],
