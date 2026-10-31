@@ -42,6 +42,25 @@ describe("C++ modeline selection", () => {
     }
   });
 
+  it("accepts complete aliases followed by LF or CRLF without a colon", () => {
+    for (const ending of ["\n", "\r\n"])
+      for (const key of ["filetype", "ft", "syntax"])
+        for (const name of ["cpp", "c++"]) {
+          const prefix = "// vim: set " + key + "=";
+          expect(
+            lumine.grammars.selectGrammar(
+              "modeline",
+              prefix + name + ending + ending + "int value;",
+            ).scopeName,
+          )
+            .withContext(name + JSON.stringify(ending))
+            .toBe("source.cpp");
+          expect(
+            lumine.grammars.selectGrammar("modeline", prefix + name + "ish" + ending).scopeName,
+          ).not.toBe("source.cpp");
+        }
+  });
+
   it("keeps failed modelines from revisiting Vim and set tokens", () => {
     expect(grammar.firstLineRegex.source).toContain("(?:(?!vim\\b).)*vim\\b");
     expect(grammar.firstLineRegex.source).toContain("(?:(?!\\bset\\b).)*\\bset\\b");

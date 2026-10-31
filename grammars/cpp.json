@@ -9,7 +9,7 @@
     "-\\*-[^*]*(?:[Mm]ode\\s*:\\s*)?[Cc]\\+\\+(?:\\s*;.*?)?\\s*-\\*-",
     // Stop at the first Vim and set tokens instead of backtracking over them.
     // \x0a keeps existing shebang prefix line counts unchanged.
-    "(?:^|\\x0a)(?:(?!vim\\b).)*vim\\b(?:(?!\\bset\\b).)*\\bset\\b.*\\b(filetype|ft|syntax)=(cpp|c\\+\\+)(?=[ \\t:]|$)"
+    "(?:^|\\x0a)(?:(?!vim\\b).)*vim\\b(?:(?!\\bset\\b).)*\\bset\\b.*\\b(filetype|ft|syntax)=(cpp|c\\+\\+)(?=[ \\t:\\x0d\\x0a]|$)"
   ],
   "treeSitter": {
     "parserSource": "github:tree-sitter/tree-sitter-cpp#c009222808634c1014f82438d4883753516a2c24",
