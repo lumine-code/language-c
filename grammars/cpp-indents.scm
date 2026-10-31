@@ -1,5 +1,3 @@
-
-
 ["{" "(" "["] @indent
 
 ["}" ")" "]"] @dedent
@@ -14,7 +12,8 @@
 ;
 ; …prevailing style is to dedent the specifier so it matches the indentation of
 ; the line above.
-(access_specifier) @dedent @indent
+((access_specifier) @dedent @indent
+  (#is-not? test.endsOnSameRowAs parent.endPosition))
 
 ; `switch` statements have a couple schools of thought, indentation-wise, and
 ; we might have to make this configurable somehow.
@@ -29,4 +28,12 @@
   (#set! indent.matchIndentOf parent.parent.startPosition)
   (#set! indent.offsetIndent 1))
 
-["case" "default"] @indent
+(":" @indent
+  (#is? test.childOfType case_statement)
+  (#is? test.lastTextOnRow true))
+
+; Reindent code without rewriting whitespace that belongs to multiline text.
+([(string_literal) (raw_string_literal) (comment)] @preserve
+  (#is? indent.reindent true)
+  (#is-not? indent.matchesCurrentRow startPosition)
+  (#set! indent.force true))

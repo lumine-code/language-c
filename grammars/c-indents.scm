@@ -1,5 +1,3 @@
-
-
 ["{" "(" "["] @indent
 
 ["}" ")" "]"] @dedent
@@ -17,4 +15,12 @@
   (#set! indent.matchIndentOf parent.parent.startPosition)
   (#set! indent.offsetIndent 1))
 
-["case" "default"] @indent
+(":" @indent
+  (#is? test.childOfType case_statement)
+  (#is? test.lastTextOnRow true))
+
+; Reindent code without rewriting whitespace that belongs to multiline text.
+([(string_literal) (comment)] @preserve
+  (#is? indent.reindent true)
+  (#is-not? indent.matchesCurrentRow startPosition)
+  (#set! indent.force true))
