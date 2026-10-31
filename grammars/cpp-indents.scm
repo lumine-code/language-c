@@ -1,3 +1,10 @@
+; Raw-string parentheses quote data, including when recovery drops the literal
+; wrapper. Its raw prefix identifies the opener without rejecting other errors.
+(raw_string_literal ["(" ")"] @_IGNORE_ (#set! capture.final true))
+(ERROR ["R\"" "LR\"" "uR\"" "UR\"" "u8R\""]
+  . (raw_string_delimiter)? . "(" @_IGNORE_
+  (#set! capture.final true))
+
 ["{" "(" "["] @indent
 
 ["}" ")" "]"] @dedent

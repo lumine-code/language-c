@@ -118,4 +118,46 @@ describe("c conservative indentation", () => {
     await editor.insertNewline();
     expect(editor.lineTextForBufferRow(3)).toBe("      ");
   });
+
+  it("does not indent raw-string opener parentheses recovered from unfinished C++ literals", async () => {
+    for (const source of [
+      'auto value = R"(',
+      'auto value = R"({',
+      'auto value = LR"tag({',
+      'auto value = uR"tag([',
+      'auto value = UR"({',
+      'auto value = u8R"tag((',
+    ]) {
+      await start("raw.cpp", source);
+      editor.setCursorBufferPosition([0, Infinity]);
+      await editor.insertNewline();
+      expect(editor.lineTextForBufferRow(1)).withContext(source).toBe("");
+    }
+  });
+
+  it("retains the inherited margin while entering C++ raw literal content", async () => {
+    await start("raw.cpp", 'void run() {\n  auto value = R"({');
+    editor.setCursorBufferPosition([1, Infinity]);
+    await editor.insertNewline();
+    expect(editor.lineTextForBufferRow(2)).toBe("  ");
+    await start("raw.cpp", 'auto value = R"(first\nlast)";');
+    editor.setCursorBufferPosition([0, Infinity]);
+    await editor.insertNewline();
+    expect(editor.lineTextForBufferRow(1)).toBe("");
+  });
+
+  it("keeps unfinished C++ containers independent of raw-string parentheses", async () => {
+    for (const source of [
+      "void run() {",
+      "void run() { // explanation",
+      'auto values = { R"(text)",',
+      'run(R"tag(text)tag",',
+      'void run() {\n  auto value = R"({',
+    ]) {
+      await start("raw.cpp", source);
+      editor.setCursorBufferPosition([0, Infinity]);
+      await editor.insertNewline();
+      expect(editor.lineTextForBufferRow(1)).withContext(source).toBe("  ");
+    }
+  });
 });
