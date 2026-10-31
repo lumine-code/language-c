@@ -23,6 +23,25 @@ describe("C++ modeline selection", () => {
     expect(grammar.firstLineRegex.test("preceding line\n// vim: set ft=cpp:")).toBe(true);
   });
 
+  it("requires complete C++ modeline aliases", () => {
+    for (const key of ["filetype", "ft", "syntax"]) {
+      for (const name of ["cpp", "c++"])
+        expect(
+          lumine.grammars.selectGrammar("modeline", "// vim: set " + key + "=" + name + ":")
+            .scopeName,
+        )
+          .withContext(name)
+          .toBe("source.cpp");
+      for (const name of ["cppish", "cpp-extra", "c++ish"])
+        expect(
+          lumine.grammars.selectGrammar("modeline", "// vim: set " + key + "=" + name + ":")
+            .scopeName,
+        )
+          .withContext(name)
+          .not.toBe("source.cpp");
+    }
+  });
+
   it("keeps failed modelines from revisiting Vim and set tokens", () => {
     expect(grammar.firstLineRegex.source).toContain("(?:(?!vim\\b).)*vim\\b");
     expect(grammar.firstLineRegex.source).toContain("(?:(?!\\bset\\b).)*\\bset\\b");
