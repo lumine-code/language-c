@@ -11,6 +11,7 @@
     "grammar": "c.wasm",
     "languageSegment": "c",
     "highlightsQuery": ["c-shared-highlights.scm", "c-highlights.scm"],
+    "tagsQuerySupportsLocalPath": true,
     "tagsQuery": "c-tags.scm",
     "foldsQuery": "c-folds.scm",
     "indentsQuery": "c-indents.scm",

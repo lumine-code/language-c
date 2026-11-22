@@ -17,6 +17,7 @@
     "grammar": "cpp.wasm",
     "languageSegment": "cpp",
     "highlightsQuery": ["c-shared-highlights.scm", "cpp-highlights.scm"],
+    "tagsQuerySupportsLocalPath": true,
     "tagsQuery": "cpp-tags.scm",
     "foldsQuery": "cpp-folds.scm",
     "indentsQuery": "cpp-indents.scm",
